@@ -17,8 +17,12 @@ enum class ElementType {
 }
 
 fun main() {
-    val result = processList(listOf(1, false))
-    println("hola")
+    val resultList: List<Any?> = listOf(30, false, "Carlos", true, null, 35.4)
+
+    val result = processList(resultList)
+    result?.forEach {
+        element -> println(element)
+    }
 }
 
 fun processList(inputList: List<Any?>?): MutableList<ItemData>? {
@@ -28,28 +32,40 @@ fun processList(inputList: List<Any?>?): MutableList<ItemData>? {
         return mutableListOf()
     }
 
-    for (item in inputList) {
+    val resultList = mutableListOf<ItemData>()
+    for ((index, item) in inputList.withIndex()) {
+        if (item == null) {
+            continue
+        }
+        val type: ElementType
+        val info: String
+
         if (item is Int) {
-            if (item % 10 == 0 ) {
-                println("M10")
+            type = ElementType.ENTERO
+            info =  if (item % 10 == 0 ) {
+                "M10"
             } else if (item % 5 == 0) {
-                println("M5")
+                "M5"
             } else if (item % 2 == 0) {
-                println("M2")
+                "M2"
             } else {
-                println("-")
+                "-"
             }
         } else if (item is String) {
-            println("L" + item.length)
+            type = ElementType.CADENA
+            info = "L${item.length}"
         } else if (item is Boolean) {
-            if (item == true) {
-                println("verdadero")
+            type = ElementType.BOOLEANO
+            info = if (item) {
+                "verdadero"
             } else {
-                println("falso")
+                "falso"
             }
         } else {
-            println("desconocido")
+            type = ElementType.DESCONOCIDO
+            info = "desconocido"
         }
-
+        resultList.add(ItemData(originalPos = index, originalValue = item, type = type, info = info))
     }
+    return resultList
 }
