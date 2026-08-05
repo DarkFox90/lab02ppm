@@ -1,14 +1,23 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+data class ItemData(
+    val originalPos: Int,
+    val originalValue: Any?,
+    val type: ElementType,
+    val info: String
+)
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
-    }
+enum class ElementType {
+    CADENA,
+    ENTERO,
+    BOOLEANO,
+    DESCONOCIDO
+}
+
+fun main() {
+    val result = processList(listOf(1, false))
+    println("hola")
+}
+
+fun processList(inputList: List<Any?>?): MutableList<ItemData>? {
+    val listaMutable = mutableListOf(1,2,3,4,5)
+    return null
 }
