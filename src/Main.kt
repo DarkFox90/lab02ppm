@@ -20,8 +20,11 @@ fun main() {
     val resultList: List<Any?> = listOf(30, false, "Carlos", true, null, 35.4)
 
     val result = processList(resultList)
-    result?.forEach {
-        element -> println(element)
+
+    if (result != null) {
+        for (element in result) {
+            println(element)
+        }
     }
 }
 
